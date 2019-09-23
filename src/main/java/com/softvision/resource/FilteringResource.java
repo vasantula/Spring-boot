@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.softvision.bean.FilterBean;
+import com.softvision.bean.FilterUser;
 import com.softvision.bean.User;
 
 @RestController
@@ -31,7 +32,7 @@ public class FilteringResource {
 	
 	@GetMapping("/filtering-dynamic")
 	public MappingJacksonValue getFilterBeanDynamically() {
-		User user = new User(4, "Dynamic", new Date());		
+		FilterUser user = new FilterUser(4, "Dynamic", new Date());		
 		MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(user);		
 		String[] filterParameters = {"id","name"};
 		mappingJacksonValue.setFilters(getFilter(filterParameters));
@@ -40,8 +41,8 @@ public class FilteringResource {
 	
 	@GetMapping("/filtering-list-dynamic")
 	public MappingJacksonValue getFilterBeanListDynamically() {		
-		List<User> list = Arrays.asList(new User(4, "Dynamic", new Date()), 
-				new User(3, "Dynamic2", new Date()));		
+		List<FilterUser> list = Arrays.asList(new FilterUser(4, "Dynamic", new Date()), 
+				new FilterUser(3, "Dynamic2", new Date()));		
 		MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(list);		
 		String[] filterParameters = {"birthDate","name"};
 		mappingJacksonValue.setFilters(getFilter(filterParameters));
@@ -49,8 +50,7 @@ public class FilteringResource {
 	}
 	private FilterProvider getFilter(String[] filterParameters) {
 		SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept(filterParameters);
-		FilterProvider filters = new SimpleFilterProvider().addFilter("UserBeanFilter", filter);
-		return filters;
+		return new SimpleFilterProvider().addFilter("UserBeanFilter", filter);
 	}
 	
 }

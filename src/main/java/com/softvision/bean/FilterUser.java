@@ -11,7 +11,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel
-public class User {
+@JsonFilter("UserBeanFilter")
+public class FilterUser {
 
 	private int id;
 	
@@ -45,14 +46,14 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", birthDate=" + birthDate + "]";
 	}
-	public User(int id, String name, Date birthDate) {
+	public FilterUser(int id, String name, Date birthDate) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.birthDate = birthDate;
 	}
 	
-	protected User() {
+	protected FilterUser() {
 		
 	}
 	
