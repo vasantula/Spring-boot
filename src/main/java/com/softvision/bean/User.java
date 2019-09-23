@@ -2,6 +2,9 @@ package com.softvision.bean;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
@@ -9,12 +12,16 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel
+@Entity
 public class User {
 
+	@Id
+	@GeneratedValue
 	private int id;
 	
 	@Size(min=2, message="Name should have minimum 2 characters.")
 	@ApiModelProperty(notes="Name should have minimum 2 characters.")
+	
 	private String name;
 	
 	@Past(message="Date should be past date not valid for future dates.")
