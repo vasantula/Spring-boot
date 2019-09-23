@@ -1,3 +1,5 @@
 insert into user values(10, sysdate(), 'Ramesh1')
 insert into user values(11, sysdate(), 'Ramesh2')
 insert into user values(12, sysdate(), 'Ramesh3')
+insert into post values(1100, 'My first Post', 10)
+insert into post values(1101, 'My second Post', 10)

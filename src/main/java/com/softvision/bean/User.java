@@ -1,10 +1,12 @@
 package com.softvision.bean;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
@@ -28,6 +30,15 @@ public class User {
 	@ApiModelProperty(notes="Date should be past date not valid for future dates.")
 	private Date birthDate;
 	
+	@OneToMany(mappedBy="user")
+	private List<Post> posts;
+	
+	public List<Post> getPosts() {
+		return posts;
+	}
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
 	public int getId() {
 		return id;
 	}
