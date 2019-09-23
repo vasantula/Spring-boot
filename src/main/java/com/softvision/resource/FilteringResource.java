@@ -13,7 +13,6 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.softvision.bean.FilterBean;
 import com.softvision.bean.FilterUser;
-import com.softvision.bean.User;
 
 @RestController
 public class FilteringResource {
