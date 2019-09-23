@@ -26,12 +26,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.softvision.bean.HelloWorld;
 import com.softvision.bean.Post;
 import com.softvision.bean.User;
 import com.softvision.exception.UserNotFoundException;
 import com.softvision.repository.UserRepository;
-import com.softvision.service.UserService;
 
 /**
  * @author ramesh.vasantula
@@ -40,6 +38,12 @@ import com.softvision.service.UserService;
 @RestController
 public class UserJPAResource {
 
+	/**
+	 * H2 DB URL to login locally
+	 * Settings Name/ Saved Settings = Generic H2 (Embedded)
+	 * JDBC URL = jdbc:h2:mem:testdb 
+	 * http://localhost:8080/h2-console 
+	 */
 	@Autowired
 	private MessageSource messageSource;
 	
@@ -50,12 +54,17 @@ public class UserJPAResource {
 	public List<User> getUsers() {
 		return userRepository.findAll();
 	}
+	/**
+	 * HATEOAS implementation for reference links
+	 * @param id
+	 * @return
+	 */
 	@GetMapping(path="/jpa/users/{id}")
 	public Resource<User> findUser(@PathVariable int id) {
 		Optional<User> user = userRepository.findById(id);
 		if(!user.isPresent()) {
 			throw new UserNotFoundException("id-"+id);
-		}
+		}		
 		Resource<User> resource = new Resource<User>(user.get());
 		ControllerLinkBuilder linkTo = linkTo(methodOn(this.getClass()).getUsers());
 
